@@ -32,5 +32,7 @@ RUN which ssh-agent || apt-get install openssh-client -y
 
 RUN rm -rf /var/lib/apt/lists/*
 
-COPY entrypoint.sh /entrypoint.sh
+COPY php7.1-builder/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
