@@ -28,4 +28,9 @@ ENV COMPOSER_CACHE_DIR /cache
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 RUN curl -sSL https://get.docker.com/ | sh
 
+RUN which ssh-agent || apt-get install openssh-client -y
+
 RUN rm -rf /var/lib/apt/lists/*
+
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
