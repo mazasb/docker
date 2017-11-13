@@ -24,6 +24,7 @@ RUN echo "memory_limit=-1" > "$PHP_INI_DIR/conf.d/memory-limit.ini" \
     && echo "date.timezone=Europe/Budapest" > "$PHP_INI_DIR/conf.d/date_timezone.ini"
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_CACHE_DIR /cache
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 RUN curl -sSL https://get.docker.com/ | sh
 
