@@ -17,6 +17,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && docker-php-ext-install -j$(nproc) gd
     && pecl install \
         redis \
-        xdebug
+        xdebug \
+    && echo "date.timezone=Europe/Budapest" > "$PHP_INI_DIR/conf.d/date_timezone.ini"
 
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_CACHE_DIR /cache
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
