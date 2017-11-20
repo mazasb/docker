@@ -1,7 +1,7 @@
-FROM php:7.1-fpm-jessie
+FROM mazasb/php:7.1
 
 MAINTAINER Balazs Mazas <mazasb@gmail.com>
-ENV UPDATED_AT 2017-11-12
+LABEL updated_at="2017-11-20"
 
 RUN apt-get update && apt-get install -y \
         git \
@@ -33,7 +33,9 @@ RUN curl -L https://github.com/docker/compose/releases/download/1.17.0/docker-co
 
 RUN which ssh-agent || apt-get install openssh-client -y
 
-RUN rm -rf /var/lib/apt/lists/*
+RUN rm -rf /var/lib/apt/lists/* \
+    && apt-get purge -y --auto-remove
+    # -o APT::AutoRemove::RecommendsImportant=false
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
